@@ -3,7 +3,11 @@
  * (c) 2013-2013 GoCardless, Ltd.
  * https://github.com/gocardless-ng/ng-gc-app-content-directive.git
  * License: MIT
- */'use strict';
+ */
+(function(){
+'use strict';
+
+'use strict';
 
 angular.module('gc.appContent', [
   'app-content-template.html'
@@ -21,7 +25,8 @@ angular.module('gc.appContent', [
   }
 ]);
 
-angular.module('app-content-template.html', []).run(function($templateCache) {
+angular.module('app-content-template.html', []).run(['$templateCache', function($templateCache) {
   $templateCache.put('app-content-template.html',
     '<div class="site__container"><main ng-transclude="" class="page__content"></main></div>');
-});
+}]);
+})();
