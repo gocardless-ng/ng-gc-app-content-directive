@@ -1,5 +1,7 @@
 'use strict';
 
+var componentFiles = require('./main');
+
 var BROWSERS = [
   'PhantomJS',
   'Opera',
@@ -10,8 +12,7 @@ var BROWSERS = [
 ];
 
 var config = {
-  src: 'src/',
-  build: 'tmp/'
+  src: 'src/'
 };
 
 module.exports = function(grunt) {
@@ -62,75 +63,13 @@ module.exports = function(grunt) {
         }
       }
     },
-    copy: {
-      build: {
-        files: [{
-          expand: true,
-          flatten: true,
-          cwd: '<%= config.src %>',
-          dest: '<%= config.build %>',
-          src: [
-            '**/*.js',
-            '!**/*spec.js'
-          ]
-        }]
-      }
-    },
-    concat: {
-      options: {
-        stripBanners: true,
-        banner: '<%= banner %>' +
-          '(function(){\n' +
-          '\'use strict\';\n\n',
-        footer: '})();'
-      },
-      build: {
-        src: ['<%= config.build %>/*.js'],
-        dest: '<%= bower.main %>'
-      }
-    },
-    clean: {
-      build: {
-        files: [{
-          dot: true,
-          src: [
-            '<%= config.build %>'
-          ]
-        }]
-      }
-    },
-    ngtemplatecache: {
-      options: {
-        stripPrefix: '<%= config.build %>'
-      },
-      build: {
-        files: [{
-          src: ['<%= config.build %>/**/*.html'],
-          dest: '<%= config.build %>/directive-template.js'
-        }]
-      }
-    },
-    htmlmin: {
-      build: {
-        options: {
-          removeComments: true,
-          collapseWhitespace: true
-        },
-        files: [{
-          expand: true,
-          flatten: true,
-          src: ['<%= config.src %>/**/*.html'],
-          dest: '<%= config.build %>'
-        }]
-      }
-    },
     uglify: {
       options: {
         banner: '<%= banner %>'
       },
       dist: {
         files: {
-          '<%= bower.name %>.min.js': ['<%= bower.main %>']
+          '<%= bower.name %>.min.js': componentFiles
         }
       }
     },
@@ -141,24 +80,23 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('test', [
+  grunt.registerTask('sanity-check', [
     'jshint',
+    'ddescribe-iit'
+  ]);
+
+  grunt.registerTask('test', [
+    'sanity-check',
     'karma:unit'
   ]);
 
   grunt.registerTask('citest', [
-    'jshint',
-    'ddescribe-iit',
+    'sanity-check',
     'karma:ci'
   ]);
 
   grunt.registerTask('build', [
-    // 'test',
-    'htmlmin',
-    'ngtemplatecache',
-    'copy:build',
-    'concat',
-    'clean:build',
+    'test',
     'uglify'
   ]);
 };

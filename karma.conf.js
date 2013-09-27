@@ -1,17 +1,11 @@
 'use strict';
 
+var componentFiles = require('./main');
+
 module.exports = function(config) {
   config.set({
     // base path, that will be used to resolve files and exclude
     basePath: './',
-
-    preprocessors: {
-      '**/*.html': ['ng-html2js']
-    },
-
-    ngHtml2JsPreprocessor: {
-      stripPrefix: 'src/',
-    },
 
     // list of files / patterns to load in the browser
     files: [
@@ -25,12 +19,9 @@ module.exports = function(config) {
       // Specs helpers
       'components/jasmine-helpers/*.js',
 
-      // app & specs
-      'src/**/*.js',
-
-      // templates
-      'src/**/*.html'
-    ],
+      // specs
+      'src/**/*.spec.js',
+    ].concat(componentFiles),
 
     // Start these browsers, currently available:
     // - Chrome
