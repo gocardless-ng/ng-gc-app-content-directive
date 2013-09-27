@@ -63,6 +63,12 @@ module.exports = function(grunt) {
         }
       }
     },
+    copy: {
+      build: {
+        src: componentFiles,
+        dest: '<%= bower.name %>.js',
+      },
+    },
     uglify: {
       options: {
         banner: '<%= banner %>'
@@ -100,6 +106,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', [
     'test',
+    'copy',
     'uglify'
   ]);
 };
