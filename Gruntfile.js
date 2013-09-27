@@ -68,6 +68,9 @@ module.exports = function(grunt) {
         banner: '<%= banner %>'
       },
       dist: {
+        options: {
+          sourceMap: '<%= bower.name %>.map'
+        },
         files: {
           '<%= bower.name %>.min.js': componentFiles
         }
