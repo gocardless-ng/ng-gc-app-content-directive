@@ -1,6 +1,6 @@
 {
   "name": "ng-gc-app-content-directive",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/gocardless-ng/ng-gc-app-content-directive.git"
@@ -22,13 +22,10 @@
     "karma-opera-launcher": "~0.1.0",
     "karma-safari-launcher": "~0.1.1",
     "karma-growl-reporter": "~0.1.1",
-    "component-script-builder": "git://github.com/gocardless-client/component-script-builder.git"
+    "ng-component-script-builder": "git://github.com/gocardless-client/ng-component-script-builder.git"
   },
   "scripts": {
     "postinstall": "bower install",
     "test": "grunt citest"
-  },
-  "engines": {
-    "node": ">= 0.10.0"
   }
 }

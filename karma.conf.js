@@ -1,6 +1,7 @@
 'use strict';
 
-var componentFiles = require('./main');
+var componentFiles = require('./index');
+var vendorComponents = require('./vendor-components.json');
 
 module.exports = function(config) {
   config.set({
@@ -8,20 +9,7 @@ module.exports = function(config) {
     basePath: './',
 
     // list of files / patterns to load in the browser
-    files: [
-      // jQuery is used when testing directives
-      'components/jquery/jquery.js',
-
-      // Vendor
-      'components/bower-angular/angular.js',
-      'components/bower-angular-mocks/angular-mocks.js',
-
-      // Specs helpers
-      'components/jasmine-helpers/*.js',
-
-      // specs
-      'src/**/*.spec.js',
-    ].concat(componentFiles),
+    files: vendorComponents.concat(componentFiles),
 
     // Start these browsers, currently available:
     // - Chrome

@@ -1,6 +1,6 @@
 'use strict';
 
-var componentFiles = require('./main');
+var componentFiles = require('./index');
 
 var BROWSERS = [
   'PhantomJS',
